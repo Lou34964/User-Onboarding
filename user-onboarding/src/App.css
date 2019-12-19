@@ -27,8 +27,9 @@
   margin: auto 100px;
   padding: 32px;
   font-weight: bold;
-  background-color: #90f022;
+  background-color: navy;
   box-shadow: 2px 2px 10px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10%;
 }
 
 .error {
@@ -79,7 +80,7 @@ label {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #7a3182;
+  color: #ffffff;
 }
 
 /* Hide the browser's default checkbox */

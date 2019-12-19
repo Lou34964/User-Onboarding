@@ -20,13 +20,16 @@ const UserForm = ({values, touched, errors, status}) =>{
                     <p className='error'>{errors.name}</p>
                 )}
                 <Field id='email' type='text' name='email' placeholder='Email'/>
-                <Field id='password' type='text' name='password' placeholder='Password' />
+                <Field id='password' type='password' name='password' placeholder='Password' />
                 {touched.password && errors.password && (
                     <p className='error'>{errors.password}</p>
                 )}
                 <label className="checkbox-container">
                     Terms of Service
                     <Field id='tos' type='checkbox' name = 'tos' checked={values.tos} />
+                    {touched.tos && errors.tos && (
+                        <p className='error'>{errors.tos}</p>
+                    )}
                     <span className='checkmark' />
                 </label>
 
@@ -34,9 +37,9 @@ const UserForm = ({values, touched, errors, status}) =>{
             </Form>
             {user.map(user =>(
                 <ul key={user.id}>
-                    <li>Name: </li>
-                    <li>Email: </li>
-                    <li>Password: </li>
+                    <li>Name: {user.name}</li>
+                    <li>Email: {user.email}</li>
+                    <li>Password: {user.password}</li>
                 </ul>
             ))}
         </div>
@@ -55,7 +58,8 @@ const FormikUserForm = withFormik({
 
     validationSchema: Yup.object().shape({
         name: Yup.string().required('Name is required'),
-        password: Yup.string().required('Password is required')
+        password: Yup.string().required('Password is required'),
+        tos: Yup.boolean().oneOf([true], 'Please accept terms of service.')
     }),
 
     handleSubmit(values, { setStatus, resetForm}) {
@@ -68,6 +72,6 @@ const FormikUserForm = withFormik({
         })
         .catch(err => console.log(err.responce));
     }
-}) (UserForm);
+})(UserForm);
 
 export default FormikUserForm;
